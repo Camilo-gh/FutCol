@@ -10,26 +10,42 @@ class TorneosController {
     @Autowired
     lateinit var torneoService: TorneosService
 
+    // GET - Obtener todos los torneos
     @GetMapping
     fun obtenerTorneos(): List<Torneo> {
         return torneoService.obtenerTorneos()
     }
 
+    // POST - Agregar torneo
     @PostMapping
     fun agregarTorneo(@RequestBody torneo: Torneo): String {
-        torneoService.agregarTorneo(torneo)
-        return "Torneo agregado"
+        return try {
+            torneoService.agregarTorneo(torneo)
+            "Torneo agregado correctamente"
+        } catch (e: Exception) {
+            "Error al agregar el torneo: ${e.message}"
+        }
     }
 
-    @PutMapping
-    fun actualizarTorneo(@RequestBody torneo: Torneo): String {
-        torneoService.actualizarTorneo(torneo)
-        return "Torneo actualizado"
+    // PUT - Actualizar torneo
+    @PutMapping("/{id}")
+    fun actualizarTorneo(@PathVariable id: Int, @RequestBody torneo: Torneo): String {
+        return try {
+            torneoService.actualizarTorneo(torneo)
+            "Torneo actualizado correctamente"
+        } catch (e: Exception) {
+            "Error al actualizar el torneo: ${e.message}"
+        }
     }
 
+    // DELETE - Eliminar torneo
     @DeleteMapping("/{id}")
     fun eliminarTorneo(@PathVariable id: Int): String {
-        torneoService.eliminarTorneo(id)
-        return "Torneo eliminado"
+        return try {
+            torneoService.eliminarTorneo(id)
+            "Torneo eliminado correctamente"
+        } catch (e: Exception) {
+            "Error al eliminar el torneo: ${e.message}"
+        }
     }
 }

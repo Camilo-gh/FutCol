@@ -1,11 +1,11 @@
-package.org.example.TrabandoEnClase
+package com.example.TrabandoEnClase
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.sql.Date
 
 data class Torneo(
-    val id: Int = 0,
+    val id: Int,
     val nombre: String,
 
     @JsonProperty("fecha_inicio")
