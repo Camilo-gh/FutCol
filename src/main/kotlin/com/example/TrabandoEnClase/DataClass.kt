@@ -10,8 +10,8 @@ data class Encuentro(
     val equipoVisitanteId: Long? = null,
     val juezId: Long? = null,
     val sedeId: Long? = null,
-    val fecha: LocalDate? = null,       // Utilizando LocalDate para la fecha
-    val hora: LocalTime? = null,        // Utilizando LocalTime para la hora
+    val fecha: LocalDate? = null,
+    val hora: LocalTime? = null,
     val golesLocal: Int? = null,
     val golesVisitante: Int? = null,
     val estado: String? = null
