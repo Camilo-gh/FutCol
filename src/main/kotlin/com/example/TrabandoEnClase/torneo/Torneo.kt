@@ -1,7 +1,7 @@
-package com.example.TrabandoEnClase
+package com.example.TrabandoEnClase.torneo
 
-import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonProperty
 import java.sql.Date
 
 data class Torneo(

@@ -1,4 +1,4 @@
-package com.example.TrabandoEnClase
+package com.example.TrabandoEnClase.Encuentros
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcTemplate
@@ -28,8 +28,8 @@ open class EncuentrosService @Autowired constructor(
             // Convertir fecha y hora a tipos LocalDate y LocalTime
             fecha = rs.getString("fecha")?.let { LocalDate.parse(it, DateTimeFormatter.ISO_DATE) },
             hora = rs.getString("hora")?.let { LocalTime.parse(it, DateTimeFormatter.ISO_TIME) },
-            golesLocal = rs.getObject("goles_local", java.lang.Integer::class.java)?.toInt(),
-            golesVisitante = rs.getObject("goles_visitante", java.lang.Integer::class.java)?.toInt(),
+            golesLocal = rs.getObject("goles_local", Integer::class.java)?.toInt(),
+            golesVisitante = rs.getObject("goles_visitante", Integer::class.java)?.toInt(),
             estado = rs.getString("estado")
         )
     }

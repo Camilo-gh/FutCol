@@ -1,4 +1,4 @@
-package com.example.TrabandoEnClase
+package com.example.TrabandoEnClase.Jugador
 
 data class Jugador(
     val id: Int,
