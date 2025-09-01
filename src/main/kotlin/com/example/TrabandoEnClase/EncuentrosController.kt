@@ -11,11 +11,11 @@ class EncuentrosController(
     private val service: EncuentrosService
 ) {
 
-    // Método para obtener todos los encuentros
+
     @GetMapping
     fun all(): List<Encuentro> = service.findAll()
 
-    // Método para obtener un encuentro por ID
+
     @GetMapping("/{id}")
     fun byId(@PathVariable id: Long): ResponseEntity<Encuentro> {
         val encuentro = service.findById(id)
@@ -26,7 +26,7 @@ class EncuentrosController(
         }
     }
 
-    // Método para crear un nuevo encuentro
+
     @PostMapping
     fun create(@RequestBody e: Encuentro): ResponseEntity<Encuentro> {
         val id = service.create(e)
@@ -34,7 +34,7 @@ class EncuentrosController(
         return ResponseEntity.status(HttpStatus.CREATED).body(created)
     }
 
-    // Método para actualizar un encuentro existente
+
     @PutMapping("/{id}")
     fun update(@PathVariable id: Long, @RequestBody e: Encuentro): ResponseEntity<Encuentro> {
         val updated = service.update(id, e)

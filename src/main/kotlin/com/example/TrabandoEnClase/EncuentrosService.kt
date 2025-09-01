@@ -16,7 +16,7 @@ open class EncuentrosService @Autowired constructor(
     private val jdbcTemplate: JdbcTemplate
 ) {
 
-    // RowMapper para mapear los resultados de la consulta a objetos Encuentro
+
     private val rowMapper = RowMapper<Encuentro> { rs: ResultSet, _: Int ->
         Encuentro(
             id = rs.getLong("id"),
@@ -34,7 +34,7 @@ open class EncuentrosService @Autowired constructor(
         )
     }
 
-    // Obtener todos los encuentros
+
     open fun findAll(): List<Encuentro> =
         jdbcTemplate.query(
             """SELECT id, torneo_id, equipo_local_id, equipo_visitante_id, juez_id, sede_id,
@@ -42,7 +42,7 @@ open class EncuentrosService @Autowired constructor(
                FROM encuentros ORDER BY id DESC""".trimIndent(), rowMapper
         )
 
-    // Obtener un encuentro por ID
+
     open fun findById(id: Long): Encuentro? =
         jdbcTemplate.query(
             """SELECT id, torneo_id, equipo_local_id, equipo_visitante_id, juez_id, sede_id,
@@ -50,7 +50,7 @@ open class EncuentrosService @Autowired constructor(
                FROM encuentros WHERE id = ?""".trimIndent(), rowMapper, id
         ).firstOrNull()
 
-    // Crear un nuevo encuentro
+
     open fun create(e: Encuentro): Long {
         val sql = """
             INSERT INTO encuentros
@@ -78,7 +78,7 @@ open class EncuentrosService @Autowired constructor(
         return kh.key!!.toLong()
     }
 
-    // Actualizar un encuentro existente
+
     open fun update(id: Long, e: Encuentro): Boolean {
         val rows = jdbcTemplate.update(
             """
@@ -95,7 +95,7 @@ open class EncuentrosService @Autowired constructor(
         return rows > 0
     }
 
-    // Eliminar un encuentro
+
     open fun delete(id: Long): Boolean =
         jdbcTemplate.update("DELETE FROM encuentros WHERE id = ?", id) > 0
 }

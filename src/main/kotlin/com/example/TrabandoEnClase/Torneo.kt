@@ -8,13 +8,11 @@ data class Torneo(
     val id: Int,
     val nombre: String,
 
-    @JsonProperty("fecha_inicio")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    val fecha_Inicio: Date,
+    val fecha_inicio: Date,
 
-    @JsonProperty("fecha_fin")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    val fecha_Fin: Date,
+    val fecha_fin: Date,
 
     val categoria: String,
     val modalidad: String,

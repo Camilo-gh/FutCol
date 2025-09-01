@@ -12,13 +12,13 @@ class TorneosService {
     @Autowired
     lateinit var jdbcTemplate: JdbcTemplate
 
-    // Mapeo de la respuesta de la base de datos a un objeto Torneo
+
     private val rowMapper = RowMapper<Torneo> { rs: ResultSet, _: Int ->
         Torneo(
             id = rs.getInt("id"),
             nombre = rs.getString("nombre"),
-            fecha_Inicio = rs.getDate("fecha_inicio"),
-            fecha_Fin = rs.getDate("fecha_fin"),
+            fecha_inicio = rs.getDate("fecha_inicio"),
+            fecha_fin = rs.getDate("fecha_fin"),
             categoria = rs.getString("categoria"),
             modalidad = rs.getString("modalidad"),
             organizador = rs.getString("organizador"),
@@ -27,26 +27,27 @@ class TorneosService {
         )
     }
 
-    // GET - Obtener todos los torneos
+
     fun obtenerTorneos(): List<Torneo> {
         val sql = "SELECT * FROM torneos"
         return jdbcTemplate.query(sql, rowMapper)
     }
 
-    // POST - Agregar un torneo
+
     fun agregarTorneo(torneo: Torneo) {
         try {
             val sql = """
                 INSERT INTO torneos 
-                (nombre, fecha_inicio, fecha_fin, categoria, modalidad, organizador, precio, sedes, created_at, updated_at)
+                (nombre, fecha_inicio, fecha_fin, categoria, modalidad,
+                organizador, precio, sedes, created_at, updated_at)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
             """.trimIndent()
 
             jdbcTemplate.update(
                 sql,
                 torneo.nombre,
-                torneo.fecha_Inicio,
-                torneo.fecha_Fin,
+                torneo.fecha_inicio,
+                torneo.fecha_fin,
                 torneo.categoria,
                 torneo.modalidad,
                 torneo.organizador,
@@ -58,20 +59,21 @@ class TorneosService {
         }
     }
 
-    // PUT - Actualizar un torneo
+
     fun actualizarTorneo(torneo: Torneo) {
         try {
             val sql = """
                 UPDATE torneos 
-                SET nombre = ?, fecha_inicio = ?, fecha_fin = ?, categoria = ?, modalidad = ?, organizador = ?, precio = ?, sedes = ?, updated_at = NOW()
+                SET nombre = ?, fecha_inicio = ?, fecha_fin = ?, categoria = ?, modalidad = ?,
+                organizador = ?, precio = ?, sedes = ?, updated_at = NOW()
                 WHERE id = ?
             """.trimIndent()
 
             jdbcTemplate.update(
                 sql,
                 torneo.nombre,
-                torneo.fecha_Inicio,
-                torneo.fecha_Fin,
+                torneo.fecha_inicio,
+                torneo.fecha_fin,
                 torneo.categoria,
                 torneo.modalidad,
                 torneo.organizador,
@@ -84,7 +86,7 @@ class TorneosService {
         }
     }
 
-    // DELETE - Eliminar un torneo
+
     fun eliminarTorneo(id: Int) {
         try {
             val sql = "DELETE FROM torneos WHERE id = ?"

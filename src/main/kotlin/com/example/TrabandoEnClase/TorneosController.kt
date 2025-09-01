@@ -10,13 +10,13 @@ class TorneosController {
     @Autowired
     lateinit var torneoService: TorneosService
 
-    // GET - Obtener todos los torneos
+
     @GetMapping
     fun obtenerTorneos(): List<Torneo> {
         return torneoService.obtenerTorneos()
     }
 
-    // POST - Agregar torneo
+
     @PostMapping
     fun agregarTorneo(@RequestBody torneo: Torneo): String {
         return try {
@@ -27,7 +27,7 @@ class TorneosController {
         }
     }
 
-    // PUT - Actualizar torneo
+
     @PutMapping("/{id}")
     fun actualizarTorneo(@PathVariable id: Int, @RequestBody torneo: Torneo): String {
         return try {
@@ -38,7 +38,6 @@ class TorneosController {
         }
     }
 
-    // DELETE - Eliminar torneo
     @DeleteMapping("/{id}")
     fun eliminarTorneo(@PathVariable id: Int): String {
         return try {
