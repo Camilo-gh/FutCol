@@ -2,6 +2,8 @@ package com.example.TrabandoEnClase
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import com.example.TrabandoEnClase.torneo.TorneosService
+import com.example.TrabandoEnClase.torneo.Torneo
 
 @RestController
 @RequestMapping("/torneos")
@@ -14,6 +16,15 @@ class TorneosController {
     @GetMapping
     fun obtenerTorneos(): List<Torneo> {
         return torneoService.obtenerTorneos()
+    }
+
+    @GetMapping("/{id}")
+    fun obtenerTorneoPorId(@PathVariable id: Int): Any {
+        return try {
+            torneoService.obtenerTorneoPorId(id) ?: "Torneo no encontrado"
+        } catch (e: Exception) {
+            "Error al obtener el torneo: ${e.message}"
+        }
     }
 
 

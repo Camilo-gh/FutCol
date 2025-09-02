@@ -33,6 +33,15 @@ class TorneosService {
         return jdbcTemplate.query(sql, rowMapper)
     }
 
+    fun obtenerTorneoPorId(id: Int): Torneo {
+        return try {
+            val sql = "SELECT * FROM torneos WHERE id = ?"
+            jdbcTemplate.queryForObject(sql, rowMapper, id)!!
+        } catch (e: Exception) {
+            throw Exception("Torneo no encontrado: ${e.message}")
+        }
+    }
+
 
     fun agregarTorneo(torneo: Torneo) {
         try {
