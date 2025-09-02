@@ -23,6 +23,7 @@ class JugadoresService {
             edad = rs.getInt("edad"),
             user_id = rs.getInt("user_id"),
             equipo_id = rs.getInt("equipo_id")
+            // el rs permite obtener los datos de esas filas
         )
     }
 
