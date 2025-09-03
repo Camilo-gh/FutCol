@@ -29,7 +29,7 @@ class TorneosService {
 
 
     fun obtenerTorneos(): List<Torneo> {
-        val sql = "SELECT * FROM torneos"
+                        val sql = "SELECT * FROM torneos"
         return jdbcTemplate.query(sql, rowMapper)
     }
 
@@ -69,7 +69,7 @@ class TorneosService {
     }
 
 
-    fun actualizarTorneo(torneo: Torneo) {
+    fun actualizarTorneo(id: Int,    torneo: Torneo) {
         try {
             val sql = """
                 UPDATE torneos 
@@ -88,7 +88,7 @@ class TorneosService {
                 torneo.organizador,
                 torneo.precio,
                 torneo.sedes,
-                torneo.id
+                id
             )
         } catch (e: Exception) {
             throw Exception("Error al actualizar torneo: ${e.message}")

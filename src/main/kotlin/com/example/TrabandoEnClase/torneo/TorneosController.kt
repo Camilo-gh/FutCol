@@ -42,7 +42,7 @@ class TorneosController {
     @PutMapping("/{id}")
     fun actualizarTorneo(@PathVariable id: Int, @RequestBody torneo: Torneo): String {
         return try {
-            torneoService.actualizarTorneo(torneo)
+            torneoService.actualizarTorneo(id, torneo)
             "Torneo actualizado correctamente"
         } catch (e: Exception) {
             "Error al actualizar el torneo: ${e.message}"
