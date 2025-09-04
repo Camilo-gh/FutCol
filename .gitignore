@@ -1,1 +1,11 @@
+*.class
 
+/out/
+/build/
+/target/
+
+.idea/
+*.iml
+
+*.log
+*.tmp
