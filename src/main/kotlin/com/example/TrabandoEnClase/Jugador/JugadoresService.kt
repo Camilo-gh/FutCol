@@ -30,7 +30,6 @@ class JugadoresService {
         val sql = "SELECT * FROM jugadores"
         return jdbcTemplate.query(sql, jugadorRowMapper)
     }
-    git rm --cached -r target/classes
     fun agregarJugador(
         nombre: String,
         n_documento: String,

@@ -16,3 +16,18 @@ data class Encuentro(
     val golesVisitante: Int? = null,
     val estado: String? = null
 )
+
+// SENTENCIA SQL:
+// CREATE TABLE encuentros (
+//  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+//  torneo_id BIGINT NULL,
+//  equipo_local_id BIGINT NULL,
+//  equipo_visitante_id BIGINT NULL,
+//  juez_id BIGINT NULL,
+//  sede_id BIGINT NULL,
+//  fecha DATE NOT NULL,
+//  hora TIME NOT NULL,
+//  goles_local INT NULL,
+//  goles_visitante INT NULL,
+//  estado VARCHAR(50) NULL
+//  );
