@@ -1,6 +1,7 @@
 package com.example.TrabandoEnClase.Login
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.stereotype.Service
@@ -19,37 +20,26 @@ class LoginsService {
         )
     }
 
-    fun obtenerLogins(): List<Login> {
-        val sql = "SELECT * FROM login"
-        return jdbcTemplate.query(sql, loginRowMapper)
-    }
+    // Solo permitir estos dos correos:
+    private val correosPermitidos = setOf("admin@torneo.com", "capitan@torneo.com")
 
-    fun agregarLogin(
-        email: String,
-        password: String
-    ) {
+    /**
+     * Devuelve el Login si las credenciales son válidas y el email está permitido; si no, null.
+     */
+    fun autenticar(email: String, password: String): Login? {
+        if (email !in correosPermitidos) return null
+
         val sql = """
-            INSERT INTO login (email, password, created_at, updated_at)
-            VALUES (?, ?, NOW(), NOW())
+            SELECT id, email, password
+            FROM login
+            WHERE email = ? AND password = ?
+            LIMIT 1
         """.trimIndent()
-        jdbcTemplate.update(sql, email, password)
-    }
 
-    fun actualizarLogin(
-        id: Int,
-        email: String,
-        password: String
-    ) {
-        val sql = """
-            UPDATE login
-            SET email = ?, password = ?, updated_at = NOW()
-            WHERE id = ?
-        """.trimIndent()
-        jdbcTemplate.update(sql, email, password, id)
-    }
-
-    fun eliminarLogin(id: Int) {
-        val sql = "DELETE FROM login WHERE id = ?"
-        jdbcTemplate.update(sql, id)
+        return try {
+            jdbcTemplate.query(sql, loginRowMapper, email, password).firstOrNull()
+        } catch (e: EmptyResultDataAccessException) {
+            null
+        }
     }
 }

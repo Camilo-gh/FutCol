@@ -1,7 +1,7 @@
 package com.example.TrabandoEnClase.Login
 
 data class Login(
-    val id: Int,
+    val id: Int? = null,
     val email: String,
     val password: String
 )
