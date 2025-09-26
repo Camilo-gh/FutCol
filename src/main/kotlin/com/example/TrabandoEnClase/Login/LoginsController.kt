@@ -14,18 +14,20 @@ class LoginsController {
 
     data class LoginResponse(
         val message: String,
-        val userId: Int? = null
+        val userId: Int? = null,
+        val role: String
     )
 
     @PostMapping("/login")
     fun login(@RequestBody credenciales: Login): ResponseEntity<LoginResponse> {
         val user = loginsService.autenticar(credenciales.email, credenciales.password)
         return if (user != null) {
-            ResponseEntity.ok(LoginResponse(message = "Login correcto", userId = user.id))
+            val role = if (user.email == "admin@torneo.com") "ADMIN" else "CAPITAN"
+            ResponseEntity.ok(LoginResponse(message = "Login correcto", userId = user.id, role = role))
         } else {
             ResponseEntity
                 .status(HttpStatus.UNAUTHORIZED)
-                .body(LoginResponse(message = "Credenciales incorrectas"))
+                .body(LoginResponse(message = "Credenciales incorrectas", userId = null, role = "NONE"))
         }
     }
 }
